@@ -1,0 +1,55 @@
+.player-carousel { width: 100%; }
+.player-carousel-slide[aria-hidden="false"] { pointer-events: auto; }
+.player-carousel-stage {
+  position: relative;
+  height: 485px;
+  perspective: 1200px;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+.player-carousel-stage:active { cursor: grabbing; }
+.player-carousel-slide {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: clamp(240px, 66vw, 310px);
+  height: 435px;
+  transform: translateX(calc(-50% + var(--offset) * 68%)) translateZ(calc(var(--distance) * -190px)) rotateY(calc(var(--direction) * -26deg));
+  transition: transform 0.6s cubic-bezier(.22, .68, 0, 1), opacity 0.45s ease;
+  pointer-events: none;
+}
+.player-carousel-controls { display: flex; align-items: center; justify-content: center; gap: 28px; }
+.player-carousel-arrow {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  background: #ffffff05;
+  color: var(--white);
+  font-size: 25px;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.player-carousel-arrow:hover { background: var(--yellow); color: var(--black); }
+.player-carousel-arrow:disabled { opacity: .3; cursor: default; }
+.player-carousel-count { font-size: 12px; color: #ffffff60; letter-spacing: .15em; font-variant-numeric: tabular-nums; }
+.player-carousel-count strong { color: var(--yellow); font-size: 18px; }
+.player-carousel-caption { min-height: 100px; max-width: 500px; margin: 24px auto 0; padding: 0 24px; }
+.player-carousel-caption p { margin: 8px 0 0; font-size: 14px; line-height: 1.7; color: #ffffff90; }
+.player-carousel-caption .player-carousel-name { font-size: 16px; font-weight: 700; color: var(--white); }
+.player-carousel-name span { color: #ffffff70; font-weight: 400; }
+.player-carousel-dots { display: flex; flex-wrap: wrap; justify-content: center; }
+.player-carousel-dots button { display: grid; place-items: center; width: 36px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.player-carousel-dots span { width: 6px; height: 6px; border-radius: 50%; background: #ffffff40; }
+.player-carousel-dots [aria-pressed="true"] span { width: 20px; border-radius: 4px; background: var(--yellow); }
+.player-carousel button:focus-visible, .player-carousel-stage:focus-visible { outline: 2px solid var(--yellow); outline-offset: -2px; }
+.player-carousel-empty { padding: 60px 24px; color: #ffffff90; }
+@media (max-width: 768px) {
+  .player-carousel-stage { perspective: 900px; height: 470px; }
+  .player-carousel-caption { min-height: 120px; }
+  .player-carousel-name span { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .player-carousel-slide, .player-carousel-arrow { transition: none; }
+}

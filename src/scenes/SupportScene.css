@@ -1,0 +1,54 @@
+.support-scene {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100svh;
+  padding: 190px 24px 30px;
+  scroll-margin-top: 88px;
+  background: var(--yellow);
+  color: #10130c;
+  text-align: center;
+}
+.support-content { position: relative; max-width: 1000px; margin: 0 auto; }
+.support-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .2em; }
+.support-percent { margin: 42px 0 16px; font-size: clamp(130px, 22vw, 280px); font-weight: 900; line-height: .85; letter-spacing: -.09em; text-shadow: 0 10px 0 #00000008; }
+.support-percent > span { font-size: .55em; vertical-align: top; line-height: 1.15; letter-spacing: -.06em; }
+.support-manifesto { margin: 58px 0 12px; font-size: clamp(13px, 1.8vw, 19px); font-weight: 800; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; }
+.support-scene h2 { margin: 0 0 24px; color: inherit; font-family: inherit; font-size: clamp(36px, 5.6vw, 72px); font-weight: 900; line-height: 1.04; letter-spacing: -.055em; }
+.support-lead { max-width: 46ch; margin: 0 auto 14px; font-size: clamp(16px, 1.7vw, 20px); font-weight: 700; line-height: 1.5; }
+.support-description { max-width: 56ch; margin: 0 auto; font-size: 15px; line-height: 1.75; color: #34331b; }
+.support-cta { display: inline-flex; align-items: center; justify-content: center; gap: 28px; min-height: 62px; margin: 32px 0; padding: 18px 28px; border: 1px solid #10130c; border-radius: 8px; background: #10130c; color: var(--yellow); text-decoration: none; font-size: 12px; font-weight: 800; letter-spacing: .07em; box-shadow: 0 6px 0 #10130c1a; transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease; }
+.support-cta > span { display: inline-block; font-size: 24px; transition: transform 220ms ease; }
+.support-cta:focus-visible { outline: 3px solid #10130c; outline-offset: 6px; }
+@media (hover: hover) {
+  .support-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 20px #10130c25; background: #232719; }
+  .support-cta:hover > span { transform: translate(3px, -3px); }
+}
+.support-cta:active { transform: translateY(0); }
+.support-details { display: grid; grid-template-columns: .8fr 2fr .6fr; max-width: 700px; margin: 0 auto; padding: 24px; gap: 22px; border: 1px solid #10130c30; border-radius: 10px; background: #ffffff16; text-align: left; }
+.support-beneficiary { grid-column: 1 / -1; }
+.support-details dt { margin-bottom: 6px; color: #484322; font-size: 11px; }
+.support-details dd { margin: 0; font-size: 13px; font-weight: 700; line-height: 1.6; overflow-wrap: anywhere; }
+.support-beneficiary dd { font-size: 17px; }
+.support-provisional { max-width: 65ch; margin: 16px auto 0; font-size: 12px; font-weight: 600; line-height: 1.6; }
+.support-form-note { max-width: 65ch; margin: 18px auto 0; font-size: 12px; line-height: 1.75; color: #484322; }
+.support-footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 80px; padding-top: 24px; border-top: 1px solid #10130c25; font-size: 10px; letter-spacing: .08em; }
+.support-footer > :first-child { font-weight: 900; }
+.support-footer a { color: inherit; font-weight: 700; text-decoration: none; }
+.support-footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.support-footer a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.support-pitch { position: absolute; z-index: -1; inset: 110px -15% auto; height: 560px; border: 1px solid #10130c0c; border-radius: 50%; pointer-events: none; transform: rotate(-12deg); }
+.support-pitch::before, .support-pitch::after { content: ""; position: absolute; inset: 55px; border: 1px solid #10130c0c; border-radius: 50%; }
+.support-pitch::after { inset: 115px; }
+.navbar.is-on-support { background: #07090ef5; }
+@media (max-width: 600px) {
+  .support-scene { padding: 130px 24px 24px; }
+  .support-percent { margin-top: 36px; }
+  .support-description { font-size: 14px; }
+  .support-cta { width: 100%; max-width: 360px; gap: 18px; padding-inline: 18px; font-size: 11px; }
+  .support-details { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
+  .support-footer { margin-top: 50px; flex-direction: column; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .support-cta, .support-cta > span { transition: none; transform: none; }
+}

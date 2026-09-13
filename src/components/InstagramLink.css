@@ -1,0 +1,5 @@
+.instagram-link { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; align-self: center; border-radius: 50%; }
+.instagram-link:hover { background: #80808020; }
+@media (max-width: 768px) {
+  .gallery-footer .instagram-link { align-self: flex-start; }
+}
