@@ -9,7 +9,7 @@ export type Match = {
   round: number;
   home: boolean;
   // Final score in home/away order. Omit for fixtures still to be played.
-  score?: { home: number; away: number };
+  score?: { home: number; away: number } | null;
 };
 
 // Sample fixtures only. Replace these with the confirmed club schedule.

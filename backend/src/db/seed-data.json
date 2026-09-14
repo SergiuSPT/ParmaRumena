@@ -1,0 +1,189 @@
+{
+  "players": [
+    {
+      "id": "demo-1",
+      "firstName": "Darius",
+      "lastName": "Hoalba",
+      "number": 1,
+      "position": "Portar",
+      "photo": "/darius.jpg",
+      "biography": "Blocheaza suturile cu fata si are mai multe goluri ca multi din echipa:))"
+    },
+    {
+      "id": "demo-2",
+      "firstName": "Mihai",
+      "lastName": "Ionescu",
+      "number": 4,
+      "position": "Fundaș",
+      "photo": "",
+      "biography": "Siguranță în apărare și atenție la fiecare duel."
+    },
+    {
+      "id": "demo-3",
+      "firstName": "Alexandru",
+      "lastName": "Marin",
+      "number": 6,
+      "position": "Fundaș",
+      "photo": "",
+      "biography": "Joacă simplu, citește jocul și construiește din spate."
+    },
+    {
+      "id": "demo-4",
+      "firstName": "Cristian",
+      "lastName": "Dumitru",
+      "number": 8,
+      "position": "Mijlocaș",
+      "photo": "",
+      "biography": "Leagă apărarea de atac, cu energie și pase care deschid jocul."
+    },
+    {
+      "id": "demo-5",
+      "firstName": "Alexandru",
+      "lastName": "Miclaus",
+      "number": 10,
+      "position": "Atacant",
+      "photo": "/miclaus.jpg",
+      "biography": "Imaginație cu mingea la picior și curaj în momentele decisive."
+    },
+    {
+      "id": "demo-6",
+      "firstName": "Vlad",
+      "lastName": "Stan",
+      "number": 7,
+      "position": "Atacant",
+      "photo": "",
+      "biography": "Viteză, instinct și dorința de a transforma fiecare ocazie în gol."
+    },
+    {
+      "id": "demo-7",
+      "firstName": "Alexandru",
+      "lastName": "Petras",
+      "number": 9,
+      "position": "Atacant",
+      "photo": "/petras.jpg",
+      "biography": "Foloseste puterea prieteniei sa incurjeze coechipierii. Numar record de bari din vole."
+    },
+    {
+      "id": "demo-8",
+      "firstName": "Răzvan",
+      "lastName": "Matei",
+      "number": 11,
+      "position": "Atacant",
+      "photo": "",
+      "biography": "Aduce energie în atac și bucuria de a juca împreună."
+    }
+  ],
+  "matches": [
+    {
+      "id": "demo-past-1",
+      "opponent": "FC Atlas",
+      "initials": "AT",
+      "date": "2026-08-23",
+      "time": "19:00",
+      "venue": "Arena Centrală",
+      "competition": "Cupa de vară",
+      "round": 1,
+      "home": true,
+      "score": {
+        "home": 4,
+        "away": 2
+      }
+    },
+    {
+      "id": "demo-past-2",
+      "opponent": "AS Progresul",
+      "initials": "PR",
+      "date": "2026-08-30",
+      "time": "20:00",
+      "venue": "Baza Sportivă Est",
+      "competition": "Cupa de vară",
+      "round": 2,
+      "home": false,
+      "score": {
+        "home": 3,
+        "away": 1
+      }
+    },
+    {
+      "id": "demo-past-3",
+      "opponent": "FC Vulturii",
+      "initials": "VU",
+      "date": "2026-09-06",
+      "time": "18:30",
+      "venue": "Arena Centrală",
+      "competition": "Cupa de vară",
+      "round": 3,
+      "home": true,
+      "score": {
+        "home": 2,
+        "away": 2
+      }
+    },
+    {
+      "id": "demo-1",
+      "opponent": "FC Unirea",
+      "initials": "UN",
+      "date": "2026-09-20",
+      "time": "19:00",
+      "venue": "Arena Centrală",
+      "competition": "Liga de minifotbal",
+      "round": 1,
+      "home": true
+    },
+    {
+      "id": "demo-2",
+      "opponent": "Sporting Club",
+      "initials": "SC",
+      "date": "2026-09-27",
+      "time": "20:30",
+      "venue": "Baza Sportivă Nord",
+      "competition": "Liga de minifotbal",
+      "round": 2,
+      "home": false
+    },
+    {
+      "id": "demo-3",
+      "opponent": "FC Victoria",
+      "initials": "VI",
+      "date": "2026-10-04",
+      "time": "18:00",
+      "venue": "Arena Centrală",
+      "competition": "Liga de minifotbal",
+      "round": 3,
+      "home": true
+    },
+    {
+      "id": "demo-4",
+      "opponent": "AS Olympik",
+      "initials": "OL",
+      "date": "2026-10-11",
+      "time": "19:30",
+      "venue": "Baza Sportivă Vest",
+      "competition": "Liga de minifotbal",
+      "round": 4,
+      "home": false
+    },
+    {
+      "id": "demo-5",
+      "opponent": "FC Dinamic",
+      "initials": "DI",
+      "date": "2026-10-18",
+      "time": "20:00",
+      "venue": "Arena Centrală",
+      "competition": "Liga de minifotbal",
+      "round": 5,
+      "home": true
+    },
+    {
+      "id": "demo-6",
+      "opponent": "Inter Arena",
+      "initials": "IA",
+      "date": "2026-10-25",
+      "time": "18:30",
+      "venue": "Complexul Sportiv Sud",
+      "competition": "Liga de minifotbal",
+      "round": 6,
+      "home": false
+    }
+  ]
+}

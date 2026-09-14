@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import Football from "../components/Football";
-import { demoMatches } from "../data/matches";
+import type { Match } from "../data/matches";
+import { useCollection } from "../hooks/useCollection";
+import CollectionStatus from "../components/CollectionStatus";
 import "./MatchesScene.css";
 
 const dateFormat = new Intl.DateTimeFormat("ro-RO", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const weekdayFormat = new Intl.DateTimeFormat("ro-RO", { weekday: "long", timeZone: "UTC" });
-const clamp = (value: number) => Math.max(0, Math.min(demoMatches.length - 1, value));
-const firstUpcomingIndex = Math.max(0, demoMatches.findIndex((match) => !match.score));
-
-const MatchesScene = () => {
+const MatchesContent = ({ matches, demo }: { matches: Match[]; demo: boolean }) => {
+  const clamp = (value: number) => Math.max(0, Math.min(matches.length - 1, value));
+  const firstUpcomingIndex = Math.max(0, matches.findIndex((match) => !match.score));
   const [position, setPosition] = useState(firstUpcomingIndex);
   const [dragging, setDragging] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -100,7 +101,7 @@ const MatchesScene = () => {
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
     if (gesture.current) return;
-    select(event.key === "Home" ? 0 : event.key === "End" ? demoMatches.length - 1 : activeIndex + (event.key === "ArrowRight" ? 1 : -1));
+    select(event.key === "Home" ? 0 : event.key === "End" ? matches.length - 1 : activeIndex + (event.key === "ArrowRight" ? 1 : -1));
   };
 
   return (
@@ -109,7 +110,7 @@ const MatchesScene = () => {
         <span className="matches-eyebrow">03 / MECIURI</span>
         <h2 id="matches-title">Următorul fluier.<br /><span>Aceeași pasiune.</span></h2>
         <p>Rezultatele de ieri. Emoția următorului meci.</p>
-        <span className="matches-demo">Meciuri și rezultate demonstrative · Ore locale, România</span>
+        <span className="matches-demo">{demo ? "Meciuri și rezultate demonstrative · " : ""}Ore locale, România</span>
       </header>
 
       <div ref={carouselRef} className="matches-carousel" role="region" aria-roledescription="carusel" aria-label="Meciuri și rezultate" onKeyDown={onKeyDown}>
@@ -118,12 +119,12 @@ const MatchesScene = () => {
         </div>
         <div className="matches-stage" tabIndex={0} aria-label="Trage sau folosește săgețile stânga și dreapta pentru a explora meciurile" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={(event) => finishDrag(event, true)} onLostPointerCapture={(event) => finishDrag(event, true)}>
           <div className="matches-track" style={{ "--position": position } as CSSProperties}>
-            {demoMatches.map((match, index) => {
+            {matches.map((match, index) => {
               const date = new Date(`${match.date}T12:00:00Z`);
               const club = <div className="match-team"><img src="/parma-rumena-logo.png" alt="" draggable={false} /><strong>Parma Rumena</strong></div>;
               const opponent = <div className="match-team"><span className="match-opponent-crest" aria-hidden="true">{match.initials}</span><strong>{match.opponent}</strong></div>;
               return (
-                <article key={match.id} className={`match-card${index === activeIndex ? " is-active" : ""}`} aria-label={`Meci ${index + 1} din ${demoMatches.length}`}>
+                <article key={match.id} className={`match-card${index === activeIndex ? " is-active" : ""}`} aria-label={`Meci ${index + 1} din ${matches.length}`}>
                   <div className="match-card-top"><span>{match.competition}</span><span>Etapa {String(match.round).padStart(2, "0")}</span></div>
                   <span className={`match-status${match.score ? " is-finished" : ""}`}>{match.score ? "Încheiat" : "Urmează"}</span>
                   <div className="match-date"><span>{weekdayFormat.format(date)}</span><time dateTime={match.date}>{dateFormat.format(date)}</time></div>
@@ -143,11 +144,24 @@ const MatchesScene = () => {
         </div>
         <div className="matches-controls">
           <button type="button" onClick={() => select(activeIndex - 1)} disabled={activeIndex === 0 || dragging} aria-label="Meciul anterior">←</button>
-          <span aria-live={dragging ? "off" : "polite"} aria-atomic="true"><strong>{String(activeIndex + 1).padStart(2, "0")}</strong> / {String(demoMatches.length).padStart(2, "0")}</span>
-          <button type="button" onClick={() => select(activeIndex + 1)} disabled={activeIndex === demoMatches.length - 1 || dragging} aria-label="Meciul următor">→</button>
+          <span aria-live={dragging ? "off" : "polite"} aria-atomic="true"><strong>{String(activeIndex + 1).padStart(2, "0")}</strong> / {String(matches.length).padStart(2, "0")}</span>
+          <button type="button" onClick={() => select(activeIndex + 1)} disabled={activeIndex === matches.length - 1 || dragging} aria-label="Meciul următor">→</button>
         </div>
         <p className="matches-hint"><span aria-hidden="true">↔</span> Explorează rezultatele și meciurile viitoare</p>
       </div>
+    </section>
+  );
+};
+
+const MatchesScene = () => {
+  const { collection, retry } = useCollection<Match>("/api/matches");
+  if (collection.status === "ready" && collection.data.length > 0) {
+    return <MatchesContent matches={collection.data} demo={collection.demo} />;
+  }
+  return (
+    <section id="matches" className="matches-scene" aria-labelledby="matches-title">
+      <header className="matches-heading"><span className="matches-eyebrow">03 / MECIURI</span><h2 id="matches-title">Meciurile noastre.</h2></header>
+      <CollectionStatus status={collection.status} retry={retry} emptyMessage="Programul meciurilor va fi anunțat în curând." />
     </section>
   );
 };

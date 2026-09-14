@@ -4,7 +4,7 @@ import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { galleryPhotos, additionalGalleryPhotos } from "../data/gallery";
 import GalleryAlbum from "../components/GalleryAlbum";
-import InstagramLink from "../components/InstagramLink";
+import SocialLinks from "../components/SocialLinks";
 import "./GalleryPage.css";
 
 gsap.registerPlugin(ScrollTrigger, Flip);
@@ -95,7 +95,7 @@ const GalleryPage = () => {
         </div>
         <footer className="gallery-footer">
           <p>Mai mult decât un meci.<br /><strong>O echipă. O poveste.</strong></p>
-          <InstagramLink />
+          <SocialLinks />
           <a href="/">← Înapoi la Parma Rumena</a>
         </footer>
       </section>

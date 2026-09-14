@@ -1,75 +1,73 @@
-# React + TypeScript + Vite
+# Parma Rumena
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The project contains two independent applications:
 
-Currently, two official plugins are available:
+- `frontend/`: React, TypeScript, Vite, all photos, and gallery optimization scripts.
+- `backend/`: Node.js API, with PostgreSQL queries and a shared connection pool in `src/db/`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Git metadata and shared ignore rules stay at the repository root.
 
-## React Compiler
+## Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Use Node.js 24 or newer. Install dependencies from the project root:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm --prefix frontend ci
+npm --prefix backend ci
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Copy `backend/.env.example` to `backend/.env` and set `DATABASE_URL` to your
+PostgreSQL connection string. Also configure `HOST` and `PORT` if needed.
+Credentials belong only in that file, never in frontend code. The `pg` driver
+is installed; provide a live database, then create the application tables:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm run db:migrate
+# Optional: insert the sample roster and fixtures (existing rows are preserved).
+npm run db:seed
 ```
+
+Migrations create `players` and `matches` and record applied versions. Sample
+data is labeled on the page; change `is_demo` to `false` for confirmed records.
+The site fetches `/api/players` and `/api/matches`; it shows a retry message
+when the API/database is unavailable instead of silently substituting mock data.
+The API can start without database credentials; only database routes need them.
+
+## Development
+
+Run these commands in separate terminals from the project root:
+
+```sh
+npm run dev:frontend
+npm run dev:backend
+```
+
+`npm run dev` also starts the frontend, as before. Vite serves the home page
+and `/galerie/` and proxies `/api` requests to `http://127.0.0.1:3001`.
+If the backend port changes, set `BACKEND_URL` in the frontend process environment.
+`GET /api/health` returns API availability; it does not check a database.
+`GET /api/health/db` executes `SELECT 1` and returns 200 when PostgreSQL is
+reachable, or 503 if the connection is missing or unavailable.
+`GET /api/players` returns player names, shirt numbers, positions, photos, and biographies.
+`GET /api/matches` returns the chronological schedule, venues, opponents, and final scores.
+Match dates and times use local Romanian schedule values; scores are in home/away order.
+
+For production, run `npm --prefix backend start`. Set `HOST=0.0.0.0` when the
+backend must accept connections outside localhost. Configure the hosting reverse
+proxy to forward `/api` to the backend; Vite's proxy is for development only.
+
+## Checks and build
+
+```sh
+npm run build
+npm run lint
+npm test
+```
+
+The frontend build is written to `frontend/dist/`, including `galerie/index.html`.
+`npm run preview` serves that build locally.
+
+After adding gallery photos, run `npm run gallery:optimize` from the root.
+This preserves originals and generates WebP derivatives under
+`frontend/public/gallery-optimized/`. It requires Python with Pillow;
+see `frontend/scripts/README.md`.

@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { supportDetails } from "../data/support";
-import InstagramLink from "../components/InstagramLink";
+import SocialLinks from "../components/SocialLinks";
 import "./SupportScene.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -63,7 +63,7 @@ const SupportScene = () => {
         <footer className="support-footer">
           <span>PARMA RUMENA</span>
           <span>Împreună, meci după meci.</span>
-          <InstagramLink />
+          <SocialLinks />
         </footer>
       </div>
     </section>
