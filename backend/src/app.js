@@ -5,8 +5,12 @@ function sendJson(response, status, body, headers = {}) {
   response.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
+
+    'Access-Control-Allow-Origin': '*',
+
     ...headers,
   });
+
   response.end(JSON.stringify(body));
 }
 
