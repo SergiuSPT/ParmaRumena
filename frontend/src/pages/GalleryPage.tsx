@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { galleryPhotos, additionalGalleryPhotos } from "../data/gallery";
+import { galleryPhotos, additionalGalleryPhotos, recentGalleryPhotos } from "../data/gallery";
 import GalleryAlbum from "../components/GalleryAlbum";
 import SocialLinks from "../components/SocialLinks";
 import "./GalleryPage.css";
@@ -78,7 +78,7 @@ const GalleryPage = () => {
         <div className="gallery-intro-content">
           <div className="gallery-logo-orbit" aria-hidden="true" />
           <span className="gallery-eyebrow">PARMA RUMENA / GALERIE</span>
-          <img className="gallery-intro-logo" src="/parma-rumena-logo.png" alt="Parma Rumena" fetchPriority="high" />
+          <img className="gallery-intro-logo" src="/gallery-optimized/parma-rumena-logo.png" alt="Parma Rumena" fetchPriority="high" />
           <p>Fiecare meci lasă o poveste.</p>
           <a className="gallery-scroll" href="#gallery-photos">Derulează pentru a o descoperi <span aria-hidden="true">↓</span></a>
         </div>
@@ -92,6 +92,7 @@ const GalleryPage = () => {
         <div ref={albumsRef} className="gallery-albums">
           <GalleryAlbum photos={galleryPhotos} label="Albumul echipei" expanded={activeAlbum === "team"} onExpand={(element) => openAlbum("team", element)} />
           <GalleryAlbum photos={additionalGalleryPhotos} label="Mai multe momente de la meciuri" expanded={activeAlbum === "matches"} onExpand={(element) => openAlbum("matches", element)} />
+          <GalleryAlbum photos={recentGalleryPhotos} label="Momente recente" expanded={activeAlbum === "recent"} onExpand={(element) => openAlbum("recent", element)} />
         </div>
         <footer className="gallery-footer">
           <p>Mai mult decât un meci.<br /><strong>O echipă. O poveste.</strong></p>

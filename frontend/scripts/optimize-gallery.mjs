@@ -1,7 +1,10 @@
 import { spawnSync } from 'node:child_process';
-import { galleryPhotos, additionalGalleryPhotos } from '../src/data/gallery.ts';
+import { readdirSync } from 'node:fs';
+import { galleryPhotos, additionalGalleryPhotos, recentGalleryPhotos } from '../src/data/gallery.ts';
 
-const sources = [...new Set([...galleryPhotos, ...additionalGalleryPhotos].map(photo => photo.src))];
+const publicPhotos = readdirSync(new URL('../public/', import.meta.url))
+  .filter(name => /\.(jpe?g|webp)$/i.test(name)).map(name => `/${name}`);
+const sources = [...new Set([...galleryPhotos, ...additionalGalleryPhotos, ...recentGalleryPhotos].map(photo => photo.src).concat(publicPhotos))];
 const result = spawnSync('python', ['scripts/optimize-gallery.py'], {
   input: JSON.stringify(sources), encoding: 'utf8', maxBuffer: 1024 * 1024,
 });

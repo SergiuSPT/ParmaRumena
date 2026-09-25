@@ -121,7 +121,7 @@ const MatchesContent = ({ matches, demo }: { matches: Match[]; demo: boolean }) 
           <div className="matches-track" style={{ "--position": position } as CSSProperties}>
             {matches.map((match, index) => {
               const date = new Date(`${match.date}T12:00:00Z`);
-              const club = <div className="match-team"><img src="/parma-rumena-logo.png" alt="" draggable={false} /><strong>Parma Rumena</strong></div>;
+              const club = <div className="match-team"><img src="/gallery-optimized/parma-rumena-logo.png" alt="" draggable={false} /><strong>Parma Rumena</strong></div>;
               const opponent = <div className="match-team"><span className="match-opponent-crest" aria-hidden="true">{match.initials}</span><strong>{match.opponent}</strong></div>;
               return (
                 <article key={match.id} className={`match-card${index === activeIndex ? " is-active" : ""}`} aria-label={`Meci ${index + 1} din ${matches.length}`}>

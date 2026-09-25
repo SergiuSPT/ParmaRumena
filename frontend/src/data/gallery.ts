@@ -7,6 +7,27 @@ export type GalleryPhoto = {
   layout: "wide" | "portrait";
 };
 
+const recentPhotoFiles = [
+  "0b4a4290-76fc-4c69-8423-7ac1eac00a3f.jpg",
+  "0beb6419-9e74-4d37-abb5-4cf31a3a7075.jpg",
+  "0c4ec607-33c7-458e-976d-4a45d88228b7.jpg",
+  "0d72eb73-7d13-4716-8a60-ea0a35c7a662-1.jpg",
+  "0d9b4b1a-fe14-4db6-9ff7-8587a9f9aa39.jpg",
+  "0e48f2d7-c76b-45ac-8e46-d3b260638ab6.jpg",
+  "0e5b571e-8c7f-4398-86d6-946a31e79d6c.jpg",
+  "0e85a8fb-361c-46ed-a224-733786cc3003.jpg",
+  "1a48aafd-3fd8-49d6-a51f-fcea91e76dfc-1.jpg",
+];
+
+export const recentGalleryPhotos: GalleryPhoto[] = recentPhotoFiles.map((file, index) => ({
+  id: `recent-${file.replace(/\.jpg$/, "")}`,
+  src: `/${file}`,
+  alt: `Fotografie din noul album Parma Rumena, cadrul ${index + 1}`,
+  title: `Momente recente · ${index + 1}`,
+  category: "ECHIPA",
+  layout: "portrait",
+}));
+
 // Remaining match photographs from public/, separate from the original album.
 const additionalPhotoNumbers = [
   "0497", "0540", "0673", "0684", "0698", "0737", "0758", "0762",

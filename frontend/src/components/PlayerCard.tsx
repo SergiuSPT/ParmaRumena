@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Player } from "../data/players";
+import { getGalleryImage } from "../data/galleryImage";
 import "./PlayerCard.css";
 
 type PlayerCardProps = {
@@ -37,7 +38,7 @@ const PlayerCard = ({ player, active, flipped, onFlip }: PlayerCardProps) => {
         <img
           key={player.photo}
           className="player-card-photo"
-          src={player.photo}
+          src={getGalleryImage(player.photo).preview.src}
           alt=""
           draggable={false}
           decoding="async"
@@ -45,7 +46,7 @@ const PlayerCard = ({ player, active, flipped, onFlip }: PlayerCardProps) => {
         />
       )}
     <div className="player-card-top">
-      <img src="/parma-rumena-logo.png" alt="" width="36" height="36" />
+      <img src="/gallery-optimized/parma-rumena-logo.png" alt="" width="36" height="36" />
       <span>PARMA RUMENA</span>
     </div>
     <div className="player-card-art" aria-hidden="true">
@@ -72,7 +73,7 @@ const PlayerCard = ({ player, active, flipped, onFlip }: PlayerCardProps) => {
     </div>
     <div className="player-card-face player-card-back" aria-hidden={!flipped}>
       <div className="player-card-back-header">
-        <img src="/parma-rumena-logo.png" alt="" width="40" height="40" />
+        <img src="/gallery-optimized/parma-rumena-logo.png" alt="" width="40" height="40" />
         <span>POVESTEA DIN SPATELE JUCATORULUI</span>
       </div>
       <span className="player-card-position">#{player.number} · {player.position}</span>

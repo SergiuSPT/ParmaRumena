@@ -325,7 +325,7 @@ const IntroScene = ({ navbarRef, onNavbarVisibilityChange }: IntroSceneProps) =>
         >
           <div ref={teamImageRef} className="intro-team-image">
             <img
-              src="/parma-demo4.jpeg"
+              src="/gallery-optimized/parma-demo4-large.webp"
               alt="Jucătorii Parma Rumena împreună, în echipamentul alb si negru"
               decoding="async"
             />
@@ -352,7 +352,7 @@ const IntroScene = ({ navbarRef, onNavbarVisibilityChange }: IntroSceneProps) =>
       <img
         ref={logoRef}
         className="floating-logo"
-        src="/parma-rumena-logo.png"
+        src="/gallery-optimized/parma-rumena-logo.png"
         alt="Parma Rumena"
       />
     </section>

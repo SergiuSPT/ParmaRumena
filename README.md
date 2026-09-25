@@ -68,6 +68,12 @@ The frontend build is written to `frontend/dist/`, including `galerie/index.html
 `npm run preview` serves that build locally.
 
 After adding gallery photos, run `npm run gallery:optimize` from the root.
+
+The optimizer also picks up JPEG/WebP photos placed directly in `frontend/public`.
+It retains existing optimized versions when originals have been removed. Once all
+three variants are verified, originals can be removed from `public`; the gallery
+uses the manifest to resolve its original source keys to optimized files.
+Site images, including the logo and icons, live in `public/gallery-optimized`.
 This preserves originals and generates WebP derivatives under
 `frontend/public/gallery-optimized/`. It requires Python with Pillow;
 see `frontend/scripts/README.md`.
