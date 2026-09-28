@@ -1,7 +1,6 @@
 .player-card {
   position: relative;
   height: 100%;
-  perspective: 1000px;
   cursor: pointer;
   border-radius: 22px;
 }
@@ -9,11 +8,15 @@
 .player-card-inner {
   position: relative;
   height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(.22, .68, 0, 1);
 }
 
-.player-card.is-flipped .player-card-inner { transform: rotateY(180deg); }
+/* Rotate each flattened face directly to avoid nested 3D backface
+   compositing artifacts in Safari, including images and scrolling text. */
+.player-card-front { transform: perspective(1000px) rotateY(0deg); }
+.player-card.is-flipped .player-card-front { transform: perspective(1000px) rotateY(-180deg); }
+.player-card.is-flipped .player-card-back { transform: perspective(1000px) rotateY(0deg); }
+.player-card-front[aria-hidden="true"],
+.player-card-back[aria-hidden="true"] { pointer-events: none; }
 .player-card:focus-visible { outline: 2px solid var(--yellow); outline-offset: 5px; }
 
 .player-card-face {
@@ -21,6 +24,8 @@
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transition: transform 0.65s cubic-bezier(.22, .68, 0, 1);
+  will-change: transform;
   overflow: hidden;
   border: 1px solid rgba(255, 213, 28, 0.38);
   border-radius: 22px;
@@ -126,25 +131,15 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 24px;
-  transform: rotateY(180deg);
+  transform: perspective(1000px) rotateY(180deg);
   background: radial-gradient(circle at top right, #215798, transparent 75%), #0b1e3c;
 }
 
-/*
- * Safari / iOS fix:
- * descendants with their own compositing layers can sometimes
- * ignore the parent's backface-visibility.
- */
-.player-card-front *,
-.player-card-back * {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
 .player-card-back-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
 .player-card-back-header img { object-fit: contain; }
 .player-card-back-header span { font-size: 9px; line-height: 1.6; letter-spacing: .12em; color: #ffffff90; }
 .player-card-biography { margin: 0; min-height: 0; overflow-y: auto; font-size: 15px; line-height: 1.75; color: #ffffffc7; user-select: text; }
 .player-card-back-hint { flex-shrink: 0; width: 100%; margin-top: auto; padding-top: 20px; font-size: 10px; color: var(--yellow); }
 @media (prefers-reduced-motion: reduce) {
-  .player-card-inner { transition: none; }
+  .player-card-face { transition: none; }
 }

@@ -45,7 +45,6 @@ const PlayerCard = ({ player, active, flipped, onFlip }: PlayerCardProps) => {
           onError={() => setFailedPhoto(player.photo)}
         />
       )}
-    {!flipped && (
       <div className="player-card-top">
         <img
           src="/gallery-optimized/parma-rumena-logo.png"
@@ -55,7 +54,6 @@ const PlayerCard = ({ player, active, flipped, onFlip }: PlayerCardProps) => {
         />
         <span>PARMA RUMENA</span>
       </div>
-    )}
     <div className="player-card-art" aria-hidden="true">
       {!showPhoto && (
       <>
