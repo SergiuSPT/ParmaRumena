@@ -129,6 +129,17 @@
   transform: rotateY(180deg);
   background: radial-gradient(circle at top right, #215798, transparent 75%), #0b1e3c;
 }
+
+/*
+ * Safari / iOS fix:
+ * descendants with their own compositing layers can sometimes
+ * ignore the parent's backface-visibility.
+ */
+.player-card-front *,
+.player-card-back * {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
 .player-card-back-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
 .player-card-back-header img { object-fit: contain; }
 .player-card-back-header span { font-size: 9px; line-height: 1.6; letter-spacing: .12em; color: #ffffff90; }

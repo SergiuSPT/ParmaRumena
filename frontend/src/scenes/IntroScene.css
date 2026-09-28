@@ -192,6 +192,7 @@
   font-weight: 900;
 
   letter-spacing: -0.045em;
+  color: var(--white);
 }
 
 .hero-content p {
